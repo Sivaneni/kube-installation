@@ -1,5 +1,5 @@
 '''
-
+install-kube.sh need to be installed on all like master and nodes
 cni.sh need to be installed on control plane
 '''
 
