@@ -78,6 +78,7 @@ metadata:
 spec:
   selector:
     app: myapp
+  type: NodePort
   ports:
     - nodePort: 30568
       port: 80
