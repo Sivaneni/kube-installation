@@ -33,3 +33,52 @@ spec:
           image: nginx
 # to edit the file at runtime run the below command
 # kubectl edit rs <replicaset-name>
+#kubectl scale rs <replicaset-name> --replicas=5
+
+#make sure line no 24 and line no 29 are in sync
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: Production
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: Production
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+#kubectl rollout status deployment/<deployment-name>
+#kubectl rollout history deployment/<deployment-name>
+#RollingUpdate,Recreate strategy
+#kubectl set image deployment/<deployment-name> <name-container>=<image-name>
+#Rollback
+#kubectl rollout undo deployment/<deployment-name>
+
+#kubectl create -f rs,yaml --record
+#perform rolling update
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+  labels:
+    app: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+    - nodePort: 30568
+      port: 80
+      targetPort: 80

@@ -1,0 +1,37 @@
+#perform rolling update
+ 
+kubectl set image deployments mydep con1=httpd:latest    
+# check container image using following command
+ 
+kubectl get deployments.apps -o wide
+ 
+# see deployment hstory 
+kubectl rollout history deployment mydep
+ 
+# describe rolling update history
+kubectl rollout history deployment mydep --revision 2
+ 
+#annotate change cause 
+kubectl annotate deployments.apps mydep kubernetes.io/change-cause="updating v2 with image httpd:latest"
+ 
+# check rolling update history
+kubectl rollout history deployment mydep
+ 
+## now roll back 
+kubectl rollout undo deployment mydep --to-revision 1
+ 
+ 
+kubectl get deployments.apps -o wide
+
+
+
+
+for i in {1..35}; do
+   kubectl exec --namespace=kube-public curl -- sh -c 'test=`wget -qO- -T 2  http://webapp-service.default.svc.cluster.local:8080/info 2>&1` && echo "$test OK" || echo "Failed"';
+   echo ""
+done
+~        
+
+
+clusterip: service creates a virtual ip inside the cluster to enable communication between different services,such as set of front-end servers to a set of backend servers.
+listen to a port on node and forward the request on that port to a port on the pod running web application.this service is know as Node-port
