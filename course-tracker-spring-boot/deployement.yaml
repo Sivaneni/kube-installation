@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: "2024-11-10T10:02:46Z"
+  generation: 1
+  labels:
+    app: course-tracker-app
+  name: course-tracker-deployement
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: course-tracker-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: course-tracker-app
+    spec:
+      containers:
+        - image: sprasanna1992/spring-boot:84cc96bb44efc3a1a518211ed744ea2f5c4eb027
+          imagePullPolicy: IfNotPresent
+          name: course-tracker
+          ports:
+            - containerPort: 8080

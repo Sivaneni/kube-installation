@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: course-tracker-pod
+  labels:
+    app: course-tracker-app
+    name: course-tracker-pod
+spec:
+  containers:
+    - name: course-tracker
+      image: sprasanna1992/spring-boot:84cc96bb44efc3a1a518211ed744ea2f5c4eb027
+      ports:
+        - containerPort: 8080

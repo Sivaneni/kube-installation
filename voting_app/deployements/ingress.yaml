@@ -2,7 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
+  tls:
+    - hosts:
+        - voting-app.com
+        - result-app.com
+        - course-tracker.com
+    - secretName: my-secret
   ingressClassName: nginx
   rules:
     - host: voting-app.com
@@ -23,5 +31,15 @@ spec:
                 name: result-service
                 port:
                   number: 80
+            path: /
+            pathType: Prefix
+    - host: course-tracker.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: course-tracker-service
+                port:
+                  number: 8080
             path: /
             pathType: Prefix
