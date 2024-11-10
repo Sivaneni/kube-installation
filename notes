@@ -34,4 +34,6 @@ done
 
 
 clusterip: service creates a virtual ip inside the cluster to enable communication between different services,such as set of front-end servers to a set of backend servers.
+
+
 listen to a port on node and forward the request on that port to a port on the pod running web application.this service is know as Node-port
