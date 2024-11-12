@@ -37,3 +37,17 @@ clusterip: service creates a virtual ip inside the cluster to enable communicati
 
 
 listen to a port on node and forward the request on that port to a port on the pod running web application.this service is know as Node-port
+
+
+link for:
+
+https://medium.com/@a-dem/kubernetes-deployment-strategies-blue-green-vs-canary-ddc2a367b628
+
+
+1cpu=1000millicpu
+memory=3 MiB=3*1024*1024=3072 MiB
+
+
+
+ingress--->hpa-->Deployment
+so will we change the rules of backend service in ingress
