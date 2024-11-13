@@ -1,0 +1,49 @@
+az aks get-credentials --resource-group kube-rg  --name voting-app-deploy
+
+
+kubectl get nodes
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+
+C:\Users\Welcome\OneDrive\Desktop\devops\kuberbetes\voting_app\deployements>kubectl get ingress
+NAME         CLASS   HOSTS                           ADDRESS         PORTS   AGE
+my-ingress   nginx   voting-app.com,result-app.com   4.213.216.152   80      2m58s
+
+we need to provide public ip of ingress in /etc/hosts file 
+
+
+etc hosts file location
+C:\Windows\System32\drivers\etc
+
+
+
+
+
+self-signed certificate steps:
+
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
+     
+	 The -x509 option specifies that you want a self-signed certificate, -nodes means no passphrase, -days 365 sets the certificate validity to one year, and -newkey rsa:2048 generates a new RSA key of 2048 bits
+	 
+	installation steps:
+	
+			https://bonguides.com/how-to-download-and-install-openssl-in-windows-11/
+			
+			$env:OPENSSL_CONF="C:\Program Files\FireDaemon OpenSSL 3\openssl.cnf"
+
+
+   kubectl create secret tls my-secret --cert=<path-to-cert> --key=<path-to-key>
+   
+   
+   
+   
+   
+     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
+     kubectl create secret tls my-secret --cert=tls.crt --key=tls.key
+     kubectl create -f .\deployement.yaml
+     kubectl create -f .\service.yaml
+     kubectl get pods,deploy,svc
+     kubectl create -f .\deployements\ingress.yaml
+     kubectl get ingress
+    
