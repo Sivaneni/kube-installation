@@ -108,3 +108,47 @@ Events:
   ----     ------            ----                   ----               -------
   Warning  FailedScheduling  9m44s                  default-scheduler  0/3 nodes are available: 1 node(s) had volume node affinity conflict. preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling.
   Warning  FailedScheduling  4m28s (x2 over 9m43s)  default-scheduler  0/3 nodes are available: 1 node(s) had volume node affinity conflict. preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling.
+
+working with gcp filestore:
+
+
+
+first run the below command to enable gcp filestore csi driver
+1. gcloud container clusters update cluster-1 \
+  --update-addons=GcpFilestoreCsiDriver=ENABLED \
+  --zone=us-south1-a
+   
+   *** try to add firewall rule in firewall of default network to allow port range of tcp:30000-32767  
+  
+2. create a namespace using namespace.yaml
+
+3.  create the filesore and gke cluster in same region and update the ip    address of the filestore in the
+  <<template file>> 
+
+  run template file
+  kubectl apply -f template.yaml later
+  
+4. run splunk-daemonset.yaml to create daemonset
+
+  kubectl apply -f splunk-daemonset.yaml
+
+5.  kubectl apply -f exposesplunk.yaml
+
+     kubectl get svc -n demons
+
+
+
+  to see all status 
+
+6. kubectl get nodes,pods,svc,ds,pv,pvc,sc -n demons -o wide
+
+
+  to run the splunk get the external ip of nodes with the nodeports that are exposed on service.
+
+  
+  
+  to delete all the resources
+
+  kubectl delete all --all -n demons
+
+  
