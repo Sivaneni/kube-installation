@@ -14,7 +14,7 @@ spec:
     driver: filestore.csi.storage.gke.io
     volumeHandle: "modeInstance/us-south1-a/fsinstanceid/myshare"
     volumeAttributes:
-      ip: 10.153.98.242
+      ip: 10.186.248.138
       volume: myshare
   claimRef:
     name: splunkpvc

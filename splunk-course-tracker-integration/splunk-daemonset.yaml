@@ -20,11 +20,9 @@ spec:
           ports:
             - containerPort: 8000
             - containerPort: 8088
-          env:
-            - name: SPLUNK_START_ARGS
-              value: "--accept-license"
-            - name: SPLUNK_PASSWORD
-              value: "yourpassword"
+          envFrom:
+            - configMapRef:
+                name: splunk-config
           volumeMounts:
             - name: splunk-data
               mountPath: /opt/splunk/etc/apps/
