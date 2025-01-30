@@ -4,8 +4,8 @@ metadata:
   name: splunk-config
   namespace: demons
 data:
-  splunk.url: "http://splunk:8088"
-  splunk.token: "yourtoken"
-  splunk.host: "splunk"
+  SPLUNK_URL: "http://splunk:8088"
+  SPLUNK_TOKEN: "f10a6314-6a95-447d-aebd-588022341a54"
+  SPLUNK_HOST: "splunk"
   SPLUNK_START_ARGS: "--accept-license"
   SPLUNK_PASSWORD: "yourpassword"
